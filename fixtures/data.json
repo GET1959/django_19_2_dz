@@ -1,0 +1,234 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category": "Beverages",
+      "description": "Soft drinks, coffees, teas, beers, and ales"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category": "Condiments",
+      "description": "Sweet and savory sauces, relishes, spreads, and seasonings"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category": "Confections",
+      "description": "Desserts, candies, and sweet breads"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Chais",
+      "description": "12 boxes x 20 bags",
+      "image": "",
+      "category": 1,
+      "price": 18,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-02-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Chang",
+      "description": "24 - 12 oz bottles",
+      "image": "",
+      "category": 1,
+      "price": 19,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-02-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Aniseed Syrup",
+      "description": "12 - 550 ml bottles",
+      "image": "",
+      "category": 2,
+      "price": 10,
+      "created_at": "2023-12-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Chef Antons Cajun Seasoning",
+      "description": "48 - 6 oz jars",
+      "image": "",
+      "category": 2,
+      "price": 22,
+      "created_at": "2023-11-01T00:00:00Z",
+      "updated_at": "2023-12-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Chef Antons Gumbo Mix",
+      "description": "36 boxes",
+      "image": "",
+      "category": 2,
+      "price": 35,
+      "created_at": "2023-10-01T00:00:00Z",
+      "updated_at": "2024-11-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Grandmas Boysenberry Jam",
+      "description": "12 - 8 oz jars",
+      "image": "",
+      "category": 2,
+      "price": 25,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Northwoods Cranberry Sauce",
+      "description": "12 - 12 oz jars",
+      "image": "",
+      "category": 2,
+      "price": 40,
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Genen Shouyu",
+      "description": "24 - 250 ml bottles",
+      "image": "",
+      "category": 2,
+      "price": 15,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Pavlova",
+      "description": "32 - 500 g boxes",
+      "image": "",
+      "category": 3,
+      "price": 17,
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2023-12-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Teatime Chocolate Biscuits",
+      "description": "10 boxes x 12 pieces",
+      "image": "",
+      "category": 3,
+      "price": 9,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Sir Rodneys Marmalade",
+      "description": "30 gift boxes",
+      "image": "",
+      "category": 3,
+      "price": 81,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "Sir Rodneys Scones",
+      "description": "24 pkgs. x 4 pieces",
+      "image": "",
+      "category": 3,
+      "price": 10,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2023-12-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "Guarana Fantastica",
+      "description": "12 - 355 ml cans",
+      "image": "",
+      "category": 1,
+      "price": 5,
+      "created_at": "2023-05-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "name": "NuNuCa Nuss-Nougat-Creme",
+      "description": "20 - 450 g glasses",
+      "image": "",
+      "category": 3,
+      "price": 14,
+      "created_at": "2023-05-01T00:00:00Z",
+      "updated_at": "2023-11-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "name": "Gumbar Gummibarchen",
+      "description": "100 - 250 g bags",
+      "image": "",
+      "category": 3,
+      "price": 23,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "Schoggi Schokolade",
+      "description": "100 - 100 g pieces",
+      "image": "",
+      "category": 3,
+      "price": 43,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2023-12-01T00:00:00Z"
+    }
+  }
+]

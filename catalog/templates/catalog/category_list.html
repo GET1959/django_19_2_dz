@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h5>Категории</h5>
+{% for category in object_list %}
+<div>
+<a class="text-muted" href="{% url 'catalog:categories' category.pk %}">{{ category }}</a>
+</div>
+{% endfor %}
+
+{% endblock %}

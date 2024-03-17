@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <h2>{{ object.name | title}}</h2>
+<!--            <img class="card-img-top" src="/media/{{ object.image }}" alt="card image cap">-->
+            <img class="card-img-top" src="{{ object.image | mymedia }}" alt="card image cap">
+            <p>{{ object.description }}</p>
+            <p>Price, $: {{ object.price }}</p>
+            <p>Category: {{ object.category }}</p>
+        </div>
+    </div>
+{% endblock %}
