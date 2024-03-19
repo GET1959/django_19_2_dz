@@ -1,0 +1,106 @@
+[
+  {
+    "model": "blog.article",
+    "pk": 1,
+    "fields": {
+      "title": "статья 1",
+      "slug": "statya-1",
+      "body": "Содержимое статьи 1",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": false,
+      "views_count": 2
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 2,
+    "fields": {
+      "title": "статья 2",
+      "slug": "statya-2",
+      "body": "Содержимое статьи 2 отредактированное",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 3
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 3,
+    "fields": {
+      "title": "статья 3",
+      "slug": "statya-3",
+      "body": "Содержимое статьи 3 отредактированное",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 4
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 4,
+    "fields": {
+      "title": "статья 4",
+      "slug": "statya-4",
+      "body": "Содержимое статьи 4 отредактированное",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 4
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 5,
+    "fields": {
+      "title": "Статья 5",
+      "slug": "statya-5",
+      "body": "Содержимое статьи 5",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 2
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 6,
+    "fields": {
+      "title": "Статья 6",
+      "slug": "statya-6",
+      "body": "Содержимое статьи 6",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": false,
+      "views_count": 4
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 7,
+    "fields": {
+      "title": "Статья 7",
+      "slug": "statya-7",
+      "body": "Содержимое статьи 7 отредактированное",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 5
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 8,
+    "fields": {
+      "title": "Статья 8",
+      "slug": "statya-8",
+      "body": "Содержимое статьи 8",
+      "preview": "",
+      "create_date": "2024-03-18",
+      "is_published": true,
+      "views_count": 3
+    }
+  }
+]
