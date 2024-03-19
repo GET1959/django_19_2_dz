@@ -5,3 +5,4 @@ tzdata==2024.1
 psycopg2-binary==2.9.9
 pillow==10.2.0
 ipython==8.21.0
+pytils==0.4.1
