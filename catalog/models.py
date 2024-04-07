@@ -3,6 +3,7 @@ from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
 
+
 class Category(models.Model):
     category = models.CharField(max_length=100, verbose_name='Категория')
     description = models.TextField(verbose_name='Описание')
@@ -25,7 +26,6 @@ class Product(models.Model):
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
 
-
     def __str__(self):
         return self.name
 
@@ -33,3 +33,18 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ('name',)
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    version_num = models.IntegerField(verbose_name='номер версии')
+    version_name = models.CharField(max_length=150, verbose_name='название версии')
+    version_sign = models.CharField(max_length=250, verbose_name='признак версии')
+
+    def __str__(self):
+        return f'{self.product} версия {self.version_num}'
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
+        ordering = ('version_num',)

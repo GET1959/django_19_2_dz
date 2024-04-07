@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load my_tags %}
 {% block content %}
-    <div class="row">
+    <div class="row"><div class="col-12 mb-3">
+    <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}">Добавить продукт</a>
+  </div>
         {% for object in object_list %}
             <div class="card" style="width: 18rem;">
 <!--                <img class="card-img-top" src="/media/{{ object.image }}" alt="card image cap">-->
@@ -9,7 +11,11 @@
                 <div class="card-body">
                     <h3 class="card-title">{{ object.name }}</h3>
                     <p>{{ object.description|slice:100 }}</p>
-                    <p><a class="btn btn-secondary" href="/product/{{ object.pk }}" role="button">View details &raquo;</a></p>
+                    <p>
+                        <a class="btn btn-success" href="/product/{{ object.pk }}" role="button">Details</a>
+                        <a class="btn btn-primary" href="/product/update/{{ object.pk }}" role="button">Edit</a>
+                        <a class="btn btn-danger" href="/product/delete/{{ object.pk }}" role="button">Delete</a>
+                    </p>
                 </div>
             </div>
         {% endfor %}
