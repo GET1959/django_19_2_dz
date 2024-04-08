@@ -18,28 +18,26 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
 
 
+FORBIDDEN_LIST = ['казино', 'криптовалюта', 'крипта', 'биржа',
+                      'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 class ProductForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'category', 'price', 'created_at', 'updated_at')
+        fields = ('name', 'description', 'category', 'price',)
 
     def clean_name(self):
-        forbidden_list = ['казино', 'криптовалюта', 'крипта', 'биржа',
-                  'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
         cleaned_data = self.cleaned_data['name']
 
-        if set(forbidden_list) & set(cleaned_data.split(' ')):
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(' ')):
             raise forms.ValidationError('Добавлены недопустимые слова')
 
         return cleaned_data
 
     def clean_description(self):
-        forbidden_list = ['казино', 'криптовалюта', 'крипта', 'биржа',
-                          'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
         cleaned_data = self.cleaned_data['description']
 
-        if set(forbidden_list) & set(cleaned_data.split(' ')):
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(' ')):
             raise forms.ValidationError('Добавлены недопустимые слова')
 
         return cleaned_data
@@ -54,6 +52,6 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     def clean_version_sign(self):
         cleaned_data = self.cleaned_data['version_sign']
         print(cleaned_data)
-        if cleaned_data != 'активна':
+        if not cleaned_data:
             raise forms.ValidationError('Данная версия не активна')
         return cleaned_data

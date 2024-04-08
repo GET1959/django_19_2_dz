@@ -43,6 +43,7 @@ class ProductDetailView(DetailView):
         return self.object
 
 
+
 class CategoryListView(ListView):
     model = Category
     extra_context = {
@@ -94,7 +95,6 @@ class ProductUpdateView(UpdateView):
             formset.save()
 
         return super().form_valid(form)
-
 
 
 class ProductDeleteView(DeleteView):
