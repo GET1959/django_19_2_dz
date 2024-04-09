@@ -91,6 +91,8 @@ class ProductUpdateView(UpdateView):
         formset = self.get_context_data()['formset']
         self.object = form.save()
         if formset.is_valid():
+            instances = formset.save(commit=False)
+            self.object.current_version = str(instances[-1])[-1]
             formset.instance = self.object
             formset.save()
 
