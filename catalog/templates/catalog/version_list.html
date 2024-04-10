@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+    <div class="row">
+        <h2>{{ object.title }}</h2>
+        <div class="col-12 mb-3">
+  </div>
+        {% for object in object_list %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h3>{{ object.product }}</h3>
+                </div>
+                <div class="card-body">
+                    <p>Номер версии: {{ object.version_num }}</p>
+                    <p>Название версии: {{ object.version_name }}</p>
+                    <p>Признак версии: {{ object.version_sign }}</p>
+                    <p>
+                        <a class="btn btn-primary" href="/product/update/{{ object.product_id }}" role="button">EDIT</a>
+                        <a class="btn btn-danger" href="/versions/delete/{{ object.pk }}" role="button">DELETE</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
