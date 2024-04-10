@@ -33,10 +33,10 @@ class ProductListView(ListView):
         'title': 'Products'
     }
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.exclude(version__version_sign=False)
-        return queryset
+    # def get_queryset(self, *args, **kwargs):
+    #     queryset = super().get_queryset(*args, **kwargs)
+    #     queryset = queryset.exclude(version__version_sign=False)
+    #     return queryset
 
 
 class ProductDetailView(DetailView):
@@ -49,7 +49,7 @@ class ProductDetailView(DetailView):
     #
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['versions'] = Version.objects.filter(product_id=self.kwargs.get('pk'))
+        context['version'] = Version.objects.filter(product_id=self.kwargs.get('pk'), version_sign=True).last()
         return context
 
 
