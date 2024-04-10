@@ -25,7 +25,6 @@ class Product(models.Model):
     price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # current_version = models.IntegerField(default=1, verbose_name='Действующая версия')
 
     def __str__(self):
         return self.name
@@ -48,4 +47,4 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'Версия'
         verbose_name_plural = 'Версии'
-        ordering = ('product','version_num')
+        ordering = ('product', 'version_num')
