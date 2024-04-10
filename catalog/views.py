@@ -42,10 +42,15 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        self.object.save()
-        return self.object
+    # def get_object(self, queryset=None):
+    #     self.object = super().get_object(queryset)
+    #     self.object.save()
+    #     return self.object
+    #
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['versions'] = Version.objects.filter(product_id=self.kwargs.get('pk'))
+        return context
 
 
 class CategoryListView(ListView):

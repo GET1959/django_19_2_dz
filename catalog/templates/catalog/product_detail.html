@@ -9,6 +9,11 @@
             <p>{{ object.description }}</p>
             <p>Price, $: {{ object.price }}</p>
             <p>Category: {{ object.category }}</p>
+            <p>Versions:
+            {% for version in versions %}
+            {{ version.version_name }}
+            {% endfor %}
+            </p>
 <!--            <p>Current version: {{ object.current_version }}</p>-->
         </div>
     </div>
