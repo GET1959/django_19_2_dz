@@ -33,6 +33,11 @@ class ProductListView(ListView):
         'title': 'Products'
     }
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.exclude(version__version_sign=False)
+        return queryset
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -41,7 +46,6 @@ class ProductDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.save()
         return self.object
-
 
 
 class CategoryListView(ListView):
@@ -91,9 +95,9 @@ class ProductUpdateView(UpdateView):
         formset = self.get_context_data()['formset']
         self.object = form.save()
         if formset.is_valid():
-            instances = formset.save(commit=False)
-            self.object.current_version = str(instances[-1])[-1]
-            formset.instance = self.object
+            # instances = formset.save(commit=False)
+            # self.object.current_version = str(instances[-1])[-1]
+            # formset.instance = self.object
             formset.save()
 
         return super().form_valid(form)
@@ -102,3 +106,15 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
+
+
+class VersionListView(ListView):
+    model = Version
+    extra_context = {
+        'title': 'Versions'
+    }
+
+
+class VersionDeleteView(DeleteView):
+    model = Version
+    success_url = reverse_lazy('catalog:versions')

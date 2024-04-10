@@ -51,6 +51,6 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
 
     def clean_version_sign(self):
         cleaned_data = self.cleaned_data['version_sign']
-        if not cleaned_data:
-            raise forms.ValidationError('Данная версия не активна')
+        # if not cleaned_data:
+        #     raise forms.ValidationError('Данная версия не активна')
         return cleaned_data

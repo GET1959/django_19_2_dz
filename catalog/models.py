@@ -25,7 +25,7 @@ class Product(models.Model):
     price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    current_version = models.IntegerField(default=1, verbose_name='Действующая версия')
+    # current_version = models.IntegerField(default=1, verbose_name='Действующая версия')
 
     def __str__(self):
         return self.name
@@ -43,9 +43,9 @@ class Version(models.Model):
     version_sign = models.BooleanField(**NULLABLE, verbose_name='признак версии')
 
     def __str__(self):
-        return f'{self.product} версия {self.version_num}'
+        return f'{self.version_name} {self.product}'
 
     class Meta:
         verbose_name = 'Версия'
         verbose_name_plural = 'Версии'
-        ordering = ('version_num',)
+        ordering = ('product','version_num')
