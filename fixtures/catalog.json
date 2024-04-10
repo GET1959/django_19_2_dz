@@ -1,0 +1,394 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category": "Beverages",
+      "description": "Soft drinks, coffees, teas, beers, and ales"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category": "Condiments",
+      "description": "Sweet and savory sauces, relishes, spreads, and seasonings"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category": "Confections",
+      "description": "Desserts, candies, and sweet breads"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Chais",
+      "description": "12 boxes x 20 bags",
+      "image": "product/chais.jpg",
+      "category": 1,
+      "price": 18,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-04-10T15:59:15.065Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Chang",
+      "description": "24 - 12 oz bottles",
+      "image": "product/chang.jpg",
+      "category": 1,
+      "price": 19,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-04-10T15:59:40.937Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Aniseed Syrup",
+      "description": "12 - 550 ml bottles",
+      "image": "product/aniseed_syrup.jpg",
+      "category": 2,
+      "price": 10,
+      "created_at": "2023-12-01T00:00:00Z",
+      "updated_at": "2024-04-10T15:58:29.272Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Chef Antons Cajun Seasoning",
+      "description": "48 - 6 oz jars",
+      "image": "product/chef_antons_cajun_seasoning.jpg",
+      "category": 2,
+      "price": 22,
+      "created_at": "2023-11-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:00:14.779Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Chef Antons Gumbo Mix",
+      "description": "36 boxes",
+      "image": "product/chef_antons_gumbo_mix.jpg",
+      "category": 2,
+      "price": 35,
+      "created_at": "2023-10-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:01:17.060Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Grandmas Boysenberry Jam",
+      "description": "12 - 8 oz jars",
+      "image": "product/boysenberry_jam.jpg",
+      "category": 2,
+      "price": 25,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:02:01.929Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Northwoods Cranberry Sauce",
+      "description": "12 - 12 oz jars",
+      "image": "product/cranberry_sauce.jpg",
+      "category": 2,
+      "price": 40,
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:03:02.547Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Genen Shouyu",
+      "description": "24 - 250 ml bottles",
+      "image": "product/genen_shouyu.jpg",
+      "category": 2,
+      "price": 15,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:01:37.016Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Pavlova",
+      "description": "32 - 500 g boxes",
+      "image": "product/pavlova.jpg",
+      "category": 3,
+      "price": 17,
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:03:46.003Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Teatime Chocolate Biscuits",
+      "description": "10 boxes x 12 pieces",
+      "image": "product/teatime_chocolate_biscuits.jpg",
+      "category": 3,
+      "price": 9,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:05:06.178Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Sir Rodneys Marmalade",
+      "description": "30 gift boxes",
+      "image": "product/sir_rodneys_marmalade.jpg",
+      "category": 3,
+      "price": 81,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:04:24.513Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "Sir Rodneys Scones",
+      "description": "24 pkgs. x 4 pieces",
+      "image": "product/sir_rodneys_scones.jpg",
+      "category": 3,
+      "price": 10,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:04:44.190Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "Guarana Fantastica",
+      "description": "12 - 355 ml cans",
+      "image": "product/guarana_fantastica.jpg",
+      "category": 1,
+      "price": 5,
+      "created_at": "2023-05-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:02:21.196Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "name": "NuNuCa Nuss-Nougat-Creme",
+      "description": "20 - 450 g glasses",
+      "image": "product/nunuca.jpg",
+      "category": 3,
+      "price": 14,
+      "created_at": "2023-05-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:03:26.456Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "name": "Gumbar Gummibarchen",
+      "description": "100 - 250 g bags",
+      "image": "product/gumbar_gummibarchen.jpg",
+      "category": 3,
+      "price": 23,
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:02:41.347Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "Schoggi Schokolade",
+      "description": "100 - 100 g pieces",
+      "image": "product/schoggi_schokolade.png",
+      "category": 3,
+      "price": 43,
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2024-04-10T16:04:04.340Z"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 1,
+    "fields": {
+      "product": 3,
+      "version_num": 1,
+      "version_name": "AS_2021",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "version_num": 1,
+      "version_name": "Chs_2021",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "version_num": 2,
+      "version_name": "Chn_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 4,
+    "fields": {
+      "product": 4,
+      "version_num": 1,
+      "version_name": "CACS_2021",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 5,
+    "fields": {
+      "product": 5,
+      "version_num": 2,
+      "version_name": "CAGM_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 6,
+    "fields": {
+      "product": 8,
+      "version_num": 3,
+      "version_name": "GS_2023",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 7,
+    "fields": {
+      "product": 6,
+      "version_num": 2,
+      "version_name": "GBJ_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 8,
+    "fields": {
+      "product": 13,
+      "version_num": 1,
+      "version_name": "GF_2021",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 9,
+    "fields": {
+      "product": 15,
+      "version_num": 3,
+      "version_name": "GG_2023",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 10,
+    "fields": {
+      "product": 7,
+      "version_num": 2,
+      "version_name": "NCS_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 11,
+    "fields": {
+      "product": 14,
+      "version_num": 3,
+      "version_name": "NNC_2023",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 12,
+    "fields": {
+      "product": 9,
+      "version_num": 2,
+      "version_name": "P_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 13,
+    "fields": {
+      "product": 16,
+      "version_num": 3,
+      "version_name": "SS_2023",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 14,
+    "fields": {
+      "product": 11,
+      "version_num": 2,
+      "version_name": "SRM_2022",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 15,
+    "fields": {
+      "product": 12,
+      "version_num": 1,
+      "version_name": "SRS_2021",
+      "version_sign": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 16,
+    "fields": {
+      "product": 10,
+      "version_num": 3,
+      "version_name": "TCB_2023",
+      "version_sign": true
+    }
+  }
+]
