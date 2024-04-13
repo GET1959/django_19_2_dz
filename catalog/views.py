@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
@@ -18,50 +19,54 @@ class HomeView(TemplateView):
         return context_data
 
 
-class ContactView(FormView):
+class ContactView(LoginRequiredMixin, FormView):
     template_name = 'contact.html'
     form_class = ContactForm
     success_url = '/product/'
+
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
     def form_valid(self, form):
         return super().form_valid(form)
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     extra_context = {
         'title': 'Products'
     }
-
-    # def get_queryset(self, *args, **kwargs):
-    #     queryset = super().get_queryset(*args, **kwargs)
-    #     queryset = queryset.exclude(version__version_sign=False)
-    #     return queryset
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
-    # def get_object(self, queryset=None):
-    #     self.object = super().get_object(queryset)
-    #     self.object.save()
-    #     return self.object
-    #
+    login_url = '/users/'
+    redirect_field_name = 'users'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['version'] = Version.objects.filter(product_id=self.kwargs.get('pk'), version_sign=True).last()
         return context
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     extra_context = {
         'title': 'Categories'
     }
 
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
-class CategoryView(ListView):
+
+class CategoryView(LoginRequiredMixin, ListView):
     model = Product
+
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
@@ -76,16 +81,22 @@ class CategoryView(ListView):
         return context_data
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
 
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
-class ProductUpdateView(UpdateView):
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
+
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -108,16 +119,22 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
 
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
-class VersionListView(ListView):
+
+class VersionListView(LoginRequiredMixin, ListView):
     model = Version
     extra_context = {
         'title': 'Versions'
     }
+
+    login_url = '/users/'
+    redirect_field_name = 'users'
 
 
 class VersionDeleteView(DeleteView):
