@@ -26,8 +26,8 @@ class ArticleListView(LoginRequiredMixin, ListView):
         'title': 'Публикация'
     }
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)

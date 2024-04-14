@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="col-12">
+        <div class="alert alert-success" role="alert">
+            <h3 class="alert-heading" align="center">Вы можете авторизоваться на сайте</h3>
+        </div>
         <form class="row" method="post" enctype="multipart/form-data">
             <div class="col-3"></div>
             <div class="col-6">
@@ -19,9 +22,6 @@
                                 ВОЙТИ
                             </button>
 
-                    </div>
-                    <div class="card-footer">
-                        <p><a href="{% url 'users:password_reset' %}" class="btn btn-warning">Восстановить пароль</a></p>
                     </div>
                 </div>
             </div>

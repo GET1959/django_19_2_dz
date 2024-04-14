@@ -24,8 +24,8 @@ class ContactView(LoginRequiredMixin, FormView):
     form_class = ContactForm
     success_url = '/product/'
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -36,15 +36,15 @@ class ProductListView(LoginRequiredMixin, ListView):
     extra_context = {
         'title': 'Products'
     }
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,15 +58,15 @@ class CategoryListView(LoginRequiredMixin, ListView):
         'title': 'Categories'
     }
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
 
 class CategoryView(LoginRequiredMixin, ListView):
     model = Product
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
@@ -86,8 +86,8 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -95,8 +95,8 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -123,8 +123,8 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
 
 class VersionListView(LoginRequiredMixin, ListView):
@@ -133,8 +133,8 @@ class VersionListView(LoginRequiredMixin, ListView):
         'title': 'Versions'
     }
 
-    login_url = '/users/'
-    redirect_field_name = 'users'
+    login_url = '/users/auth_request'
+    redirect_field_name = 'users/auth_request'
 
 
 class VersionDeleteView(DeleteView):

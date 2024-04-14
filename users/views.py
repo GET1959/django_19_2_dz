@@ -3,7 +3,7 @@ import random
 from django.conf import settings
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
@@ -14,7 +14,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import CreateView, UpdateView, TemplateView, View
 
 from users.forms import UserRegisterForm, UserProfileForm, \
-    UserLoginForm  # , UserForgotPasswordForm, UserSetNewPasswordForm
+    UserLoginForm, UserForgotPasswordForm, UserSetNewPasswordForm, UserPasswordChangeForm
 from users.models import User
 #User = get_user_model()
 
@@ -25,16 +25,6 @@ class RegisterView(CreateView):
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
 
-    # def form_valid(self, form):
-    #     self.object = form.save()
-    #     send_mail(
-    #         subject='Поздравляем с регистрацией',
-    #         message='Вы зарегистрировались на нашей платформе, добро пожаловать!',
-    #         from_email=settings.EMAIL_HOST_USER,
-    #         recipient_list=[self.object.email]
-    #     )
-    #     return super().form_valid(form)
-
     def form_valid(self, form):
         user = form.save(commit=False)
         user.is_active = False
@@ -43,9 +33,7 @@ class RegisterView(CreateView):
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         activation_url = reverse_lazy('users:confirm_email', kwargs={'uidb64': uid, 'token': token})
-        current_site = '127.0.0.1:8000'
-        set_site = Site.objects.get_current().domain
-        print(set_site)
+        current_site = Site.objects.get_current().domain  # Установил в админке DOMAIN NAME 127.0.0.1:8000
         send_mail(
             subject='Подтвердите свой электронный адрес',
             message=f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
@@ -79,21 +67,6 @@ class ProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    # def form_valid(self, form):
-    #     # Метод, который отрабатывает при успешной валидации формы
-    #     if form.is_valid():
-    #         self.object = form.save()
-    #         # Сохранение объекта перед тем, как установить ему пароль
-    #         if form.data.get('need_generate', False):
-    #             self.object.set_passeword(  # Функция установки пароля,
-    #                 # которая хеширует строку для того,
-    #                 # чтобы не хранить пароль в открытом виде в БД
-    #                 self.object.make_random_password(12)  # Функция генерации пароля
-    #             )
-    #             self.object.save()
-    #
-    #     return super().form_valid(form)
-
 
 def generate_new_password(request):
     new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
@@ -111,7 +84,7 @@ def generate_new_password(request):
 class UserConfirmEmailView(View):
 
     def get(self, request, uidb64, token):
-        print(User)
+
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = User.objects.get(pk=uid)
@@ -144,42 +117,94 @@ class EmailConfirmedView(TemplateView):
         context['title'] = 'Ваш электронный адрес активирован'
         return context
 
-    class EmailConfirmationFailedView(TemplateView):
-        template_name = 'users/email_confirmation_failed.html'
 
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['title'] = 'Ваш электронный адрес не активирован'
-            return context
+class EmailConfirmationFailedView(TemplateView):
+    template_name = 'users/email_confirmation_failed.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ваш электронный адрес не активирован'
+        return context
 
 
-# class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
+# class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
 #     """
-#     Контроллер по сбросу пароля по почте
+#     Изменение пароля пользователя
 #     """
-#     form_class = UserForgotPasswordForm
-#     template_name = 'system/user_password_reset.html'
-#     success_url = reverse_lazy('home')
-#     success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
-#     subject_template_name = 'system/email/password_subject_reset_mail.txt'
-#     email_template_name = 'system/email/password_reset_mail.html'
+#     form_class = UserPasswordChangeForm
+#     template_name = 'users/user_password_change.html'
+#     success_message = 'Ваш пароль был успешно изменён!'
 #
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Запрос на восстановление пароля'
+#         context['title'] = 'Изменение пароля на сайте'
 #         return context
 #
-#
-# class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
-#     """
-#     Контроллер установки нового пароля
-#     """
-#     form_class = UserSetNewPasswordForm
-#     template_name = 'system/user_password_set_new.html'
-#     success_url = reverse_lazy('home')
-#     success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Установить новый пароль'
-#         return context
+#     def get_success_url(self):
+#         return reverse_lazy('product')
+
+
+class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
+    """
+    Контроллер по сбросу пароля по почте
+    """
+    form_class = UserForgotPasswordForm
+    template_name = 'users/user_password_reset.html'
+    success_url = reverse_lazy('users:pw_request_sent')
+    success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
+    subject_template_name = 'users/email/password_subject_reset_mail.txt'
+    email_template_name = 'users/email/password_reset_mail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Запрос на восстановление пароля'
+        return context
+
+
+class PasswordRequestSent(TemplateView):
+    template_name = 'users/pw_request_sent.html'
+
+
+class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+    """
+    Контроллер установки нового пароля
+    """
+    form_class = UserSetNewPasswordForm
+    template_name = 'users/user_password_set_new.html'
+    success_url = reverse_lazy('users:pw_changed')
+    success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Установить новый пароль'
+        return context
+
+
+class PasswordChanged(SuccessMessageMixin, LoginView):
+    """
+    Уведомление об успешной смене пароля
+    """
+    form_class = UserLoginForm
+    template_name = 'users/pw_changed.html'
+    next_page = '/'
+    success_message = 'Добро пожаловать на сайт!'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Пароль успешно изменен'
+        return context
+
+
+class AuthorizationRequest(SuccessMessageMixin, LoginView):
+    """
+    запрос авторизации
+    """
+    form_class = UserLoginForm
+    template_name = 'users/auth_request.html'
+    next_page = '/'
+    success_message = 'Добро пожаловать на сайт!'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Для посещения этой страницы необходимо авторизоваться'
+        return context
