@@ -89,6 +89,12 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     login_url = '/users/auth_request'
     redirect_field_name = 'users/auth_request'
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product

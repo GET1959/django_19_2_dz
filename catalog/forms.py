@@ -26,7 +26,7 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'category', 'price',)
+        fields = ('name', 'description', 'category', 'price', 'image', 'owner')
 
     def clean_name(self):
         cleaned_data = self.cleaned_data['name']
@@ -53,6 +53,4 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
 
     def clean_version_sign(self):
         cleaned_data = self.cleaned_data['version_sign']
-        # if not cleaned_data:
-        #     raise forms.ValidationError('Данная версия не активна')
         return cleaned_data

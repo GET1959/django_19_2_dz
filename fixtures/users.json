@@ -1,0 +1,82 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$eivzGXuyj56olo2cJ3wnNd$H+Jke2/eeCjkmdJQJ6upQnJGKt3ZmmZ5f9Xkivbc9NU=",
+      "last_login": "2024-04-15T15:25:33.038Z",
+      "is_superuser": true,
+      "first_name": "admin",
+      "last_name": "SkyPro",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-04-11T16:50:24.493Z",
+      "email": "admin@sky.pro",
+      "phone": null,
+      "avatar": "",
+      "country": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 26,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$UB3HGGHtuyEEIxqAstaws9$cdrZZdi79/9Is+kQU57Z8EYKWwwDJlxytP1mb7Vsahk=",
+      "last_login": "2024-04-15T15:24:57.286Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-14T09:42:40.083Z",
+      "email": "topchief@yandex.ru",
+      "phone": null,
+      "avatar": "",
+      "country": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 27,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$6CHQJp9omSTvFw0WOegYDN$GMGxiWd+x3JaFQ5RTROJPt6fSoofZ+XgEsy2PKdMpnY=",
+      "last_login": "2024-04-15T15:29:29.125Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-15T15:28:56.917Z",
+      "email": "topchiev@list.ru",
+      "phone": null,
+      "avatar": "",
+      "country": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 28,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$osKcIFP3Y88iwpcKf6FPg9$bzj3o47drZ7TFVLw8kRdK6V0LEUwNurq4z5dB85EeEA=",
+      "last_login": "2024-04-15T15:50:52.011Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-15T15:50:00.704Z",
+      "email": "topchiev@mail.ru",
+      "phone": null,
+      "avatar": "",
+      "country": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

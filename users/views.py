@@ -1,9 +1,9 @@
 import random
 
 from django.conf import settings
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView, PasswordChangeView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
@@ -14,9 +14,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import CreateView, UpdateView, TemplateView, View
 
 from users.forms import UserRegisterForm, UserProfileForm, \
-    UserLoginForm, UserForgotPasswordForm, UserSetNewPasswordForm, UserPasswordChangeForm
+    UserLoginForm, UserForgotPasswordForm, UserSetNewPasswordForm
 from users.models import User
-#User = get_user_model()
 
 
 class RegisterView(CreateView):
@@ -72,13 +71,17 @@ def generate_new_password(request):
     new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
     send_mail(
         subject='Вы сменили пароль',
-        message=f'Ваш новый пароль: {new_password}',
+        message=f'Ваш новый пароль: {new_password}. Скопируйте его и войдите здесь http://127.0.0.1:8000/users/',
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[request.user.email]
     )
     request.user.set_password(new_password)
     request.user.save()
-    return redirect(reverse('catalog:home'))
+    return redirect(reverse('users:pw_generated_sent'))
+
+
+class PasswordGeneratedSent(TemplateView):
+    template_name = 'users/pw_generated_sent.html'
 
 
 class UserConfirmEmailView(View):
@@ -125,23 +128,6 @@ class EmailConfirmationFailedView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Ваш электронный адрес не активирован'
         return context
-
-
-# class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
-#     """
-#     Изменение пароля пользователя
-#     """
-#     form_class = UserPasswordChangeForm
-#     template_name = 'users/user_password_change.html'
-#     success_message = 'Ваш пароль был успешно изменён!'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Изменение пароля на сайте'
-#         return context
-#
-#     def get_success_url(self):
-#         return reverse_lazy('product')
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
