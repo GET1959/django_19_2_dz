@@ -6,16 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0005_product_current_version'),
+        ("catalog", "0005_product_current_version"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='version',
-            options={'ordering': ('product', 'version_num'), 'verbose_name': 'Версия', 'verbose_name_plural': 'Версии'},
+            name="version",
+            options={
+                "ordering": ("product", "version_num"),
+                "verbose_name": "Версия",
+                "verbose_name_plural": "Версии",
+            },
         ),
         migrations.RemoveField(
-            model_name='product',
-            name='current_version',
+            model_name="product",
+            name="current_version",
         ),
     ]

@@ -1,5 +1,3 @@
-from random import choice, choices
-
 from django import forms
 
 from catalog.models import Product, Version
@@ -9,7 +7,7 @@ class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs["class"] = "form-control"
 
 
 class ContactForm(forms.Form):
@@ -18,29 +16,38 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
 
 
-FORBIDDEN_LIST = ['казино', 'криптовалюта', 'крипта', 'биржа',
-                      'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
+FORBIDDEN_LIST = [
+    "казино",
+    "криптовалюта",
+    "крипта",
+    "биржа",
+    "дешево",
+    "бесплатно",
+    "обман",
+    "полиция",
+    "радар",
+]
 
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'category', 'price', 'image', 'owner')
+        fields = ("name", "description", "category", "price", "image", "owner")
 
     def clean_name(self):
-        cleaned_data = self.cleaned_data['name']
+        cleaned_data = self.cleaned_data["name"]
 
-        if set(FORBIDDEN_LIST) & set(cleaned_data.split(' ')):
-            raise forms.ValidationError('Добавлены недопустимые слова')
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(" ")):
+            raise forms.ValidationError("Добавлены недопустимые слова")
 
         return cleaned_data
 
     def clean_description(self):
-        cleaned_data = self.cleaned_data['description']
+        cleaned_data = self.cleaned_data["description"]
 
-        if set(FORBIDDEN_LIST) & set(cleaned_data.split(' ')):
-            raise forms.ValidationError('Добавлены недопустимые слова')
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(" ")):
+            raise forms.ValidationError("Добавлены недопустимые слова")
 
         return cleaned_data
 
@@ -49,8 +56,8 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Version
-        fields = '__all__'
+        fields = "__all__"
 
     def clean_version_sign(self):
-        cleaned_data = self.cleaned_data['version_sign']
+        cleaned_data = self.cleaned_data["version_sign"]
         return cleaned_data
