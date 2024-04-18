@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -11,7 +11,7 @@ from django.views.generic import (
     DeleteView,
 )
 
-from catalog.forms import ContactForm, ProductForm, VersionForm
+from catalog.forms import ContactForm, ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Category, Version
 
 
@@ -42,6 +42,9 @@ class ProductListView(LoginRequiredMixin, ListView):
     extra_context = {"title": "Products"}
     login_url = "/users/auth_request"
     redirect_field_name = "users/auth_request"
+
+    # def get_queryset(self):
+    #     return super().get_queryset().filter(owner=self.request.user)
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -85,9 +88,10 @@ class CategoryView(LoginRequiredMixin, ListView):
         return context_data
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'catalog.add_product'
     success_url = reverse_lazy("catalog:product")
 
     login_url = "/users/auth_request"
@@ -100,41 +104,49 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
-    form_class = ProductForm
+    permission_required = 'catalog.change_product'
     success_url = reverse_lazy("catalog:product")
 
     login_url = "/users/auth_request"
     redirect_field_name = "users/auth_request"
 
+    def has_permission(self):
+        product = self.get_object()
+        is_moderator = self.request.user.groups.filter(name='moderator').exists()
+        is_owner = product.has_change_permission(self.request.user)
+        return is_moderator or is_owner
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        VersionFormset = inlineformset_factory(
-            Product, Version, form=VersionForm, extra=1
-        )
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
         if self.request.method == "POST":
-            context_data["formset"] = VersionFormset(
-                self.request.POST, instance=self.object
-            )
+            context_data["formset"] = VersionFormset(self.request.POST, instance=self.object)
         else:
             context_data["formset"] = VersionFormset(instance=self.object)
         return context_data
+
+    def get_form_class(self):
+        product = self.get_object()
+        is_moderator = self.request.user.groups.filter(name='moderator').exists()
+        is_owner = product.has_change_permission(self.request.user)
+        if is_moderator and not is_owner:
+            return ProductModeratorForm
+        return ProductForm
 
     def form_valid(self, form):
         formset = self.get_context_data()["formset"]
         self.object = form.save()
         if formset.is_valid():
-            # instances = formset.save(commit=False)
-            # self.object.current_version = str(instances[-1])[-1]
-            # formset.instance = self.object
             formset.save()
 
         return super().form_valid(form)
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = 'catalog.delete_product'
     success_url = reverse_lazy("catalog:product")
 
     login_url = "/users/auth_request"

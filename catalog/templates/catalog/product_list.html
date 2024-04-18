@@ -14,7 +14,9 @@
                     <p>
                         <a class="btn btn-success" href="/product/{{ object.pk }}" role="button">Details</a>
                         <a class="btn btn-primary" href="/product/update/{{ object.pk }}" role="button">Edit</a>
+                        {% if user.is_superuser %}
                         <a class="btn btn-danger" href="/product/delete/{{ object.pk }}" role="button">Delete</a>
+                        {% endif %}
                     </p>
                 </div>
             </div>

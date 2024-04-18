@@ -33,7 +33,30 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ("name", "description", "category", "price", "image", "owner")
+        fields = ("name", "description", "category", "price", "image", "is_published", "owner")
+
+    def clean_name(self):
+        cleaned_data = self.cleaned_data["name"]
+
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(" ")):
+            raise forms.ValidationError("Добавлены недопустимые слова")
+
+        return cleaned_data
+
+    def clean_description(self):
+        cleaned_data = self.cleaned_data["description"]
+
+        if set(FORBIDDEN_LIST) & set(cleaned_data.split(" ")):
+            raise forms.ValidationError("Добавлены недопустимые слова")
+
+        return cleaned_data
+
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ("description", "category", "is_published")
 
     def clean_name(self):
         cleaned_data = self.cleaned_data["name"]

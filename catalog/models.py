@@ -31,6 +31,7 @@ class Product(models.Model):
     owner = models.ForeignKey(
         User, on_delete=models.SET_NULL, **NULLABLE, verbose_name="Владелец"
     )
+    is_published = models.BooleanField(default=False, **NULLABLE, verbose_name="опубликовано")
 
     def __str__(self):
         return self.name
@@ -39,6 +40,15 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ("name",)
+
+        permissions = [
+            ('set_published', 'Может управлять публикацией продукта'),
+            ('change_description', 'Может менять описание продукта'),
+            ('change_category', 'Может менять категорию продукта')
+        ]
+
+    def has_change_permission(self, owner):
+        return self.owner == owner
 
 
 class Version(models.Model):
