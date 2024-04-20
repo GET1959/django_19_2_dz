@@ -13,6 +13,7 @@ from django.views.generic import (
 
 from catalog.forms import ContactForm, ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Category, Version
+from catalog.services import get_cached_category
 
 
 class HomeView(TemplateView):
@@ -67,6 +68,12 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
     login_url = "/users/auth_request"
     redirect_field_name = "users/auth_request"
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['category_list'] = get_cached_category()
+
+        return context_data
 
 
 class CategoryView(LoginRequiredMixin, ListView):
