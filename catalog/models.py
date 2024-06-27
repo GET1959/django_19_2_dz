@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from users.models import User
@@ -28,9 +29,7 @@ class Product(models.Model):
     price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(
-        User, on_delete=models.SET_NULL, **NULLABLE, verbose_name="Владелец"
-    )
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name="Владелец")
     is_published = models.BooleanField(default=False, **NULLABLE, verbose_name="опубликовано")
 
     def __str__(self):
@@ -52,9 +51,7 @@ class Product(models.Model):
 
 
 class Version(models.Model):
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, verbose_name="Продукт"
-    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт")
     version_num = models.IntegerField(verbose_name="номер версии")
     version_name = models.CharField(max_length=150, verbose_name="название версии")
     version_sign = models.BooleanField(**NULLABLE, verbose_name="признак версии")
