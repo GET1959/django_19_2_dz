@@ -50,7 +50,7 @@ class RegisterView(CreateView):
             subject="Подтвердите свой электронный адрес",
             message=f"""Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой
             адрес электронной почты: http://{current_site}{activation_url}""",
-            from_email="fuckup@oscarbot.ru",
+            from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email],
             fail_silently=False,
         )
